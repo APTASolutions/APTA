@@ -1,0 +1,41 @@
+<odoo>
+    <data>
+        <!-- Account Move Line Form inherit-->
+        <record id="account_move_line_form_view_inherit" model="ir.ui.view">
+            <field name="name">account.move.line.apta.form.inherit</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_move_line_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='statement_id']" position="after">
+                    <field name="comment"/>
+                </xpath>
+            </field>
+        </record>
+
+                <!-- Account Move Line Tree inherit-->
+        <record id="account_move_line_tree_view_inherit" model="ir.ui.view">
+            <field name="name">account.move.line.apta.tree.inherit</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_move_line_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='statement_id']" position="after">
+                    <field name="comment" optional="hide"/>
+                </xpath>
+            </field>
+        </record>
+
+                <!-- Account Move Form inherit-->
+        <record id="account_move_form_view_inherit" model="ir.ui.view">
+            <field name="name">account.move.apta.form.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='line_ids']/tree/field[@name='account_id']" position="after">
+                    <field name="comment" optional="hide"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
+
