@@ -17,7 +17,9 @@ class AccountMoveLine(models.Model):
     )
 
     def _first_account_move_charge(self):
-        journal_id = self.env['account.journal'].search([('name', '=', 'Asientos 2021-2022')], limit=1)
+        company = self.env.company.id
+        journal_id = self.env['account.journal'].search([('name', '=', 'Asientos 2021-2022'),
+                                                         ('company_id', '=', company)], limit=1)
         req_columns = self.get_columns_names()
         account_move_env = self.env['account.move']
         move_line_env = self.env['account.move.line']
@@ -70,7 +72,8 @@ class AccountMoveLine(models.Model):
                         # Generate Data for Account Move Line
                         elif first_cell == 'CodigoCuenta':
                             account = sheet.cell_value(row, column)
-                            account_id = account_account_env.search([('code', '=', int(account))], limit=1)
+                            account_id = account_account_env.search([('code', '=', int(account)),
+                                                                     ('company_id', '=', company)], limit=1)
                             line_data.update({'account_id': account_id.id})
                         elif first_cell == 'Debe':
                             debit = sheet.cell_value(row, column)
@@ -97,12 +100,12 @@ class AccountMoveLine(models.Model):
                     _logger.info('Move credit ::::' + str(move_line.credit))
             file.unlink()
 
-    @staticmethod
-    def get_move_data(move):
+    def get_move_data(self, move):
         return {
             'date': move.get('date'),
             'name': move.get('name'),
             'journal_id': move.get('journal_id'),
+            'company_id': self.env.company.id
         }
 
     @staticmethod

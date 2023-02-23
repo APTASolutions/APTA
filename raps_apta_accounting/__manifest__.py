@@ -1,4 +1,4 @@
-# Copyright 2022-TODAY Rapsodoo Iberia S.r.L. (www.rapsodoo.com)
+# Copyright 2023-TODAY Rapsodoo Iberia S.r.L. (www.rapsodoo.com)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
 
 {
@@ -8,7 +8,7 @@
     'website': "https://www.rapsodoo.com/es/",
     'category': 'Accounting/Accounting',
     'license': 'LGPL-3',
-    'version': '16.0.1.0.0',
+    'version': '16.0.1.0.1',
 
     'depends': [
         'base',
