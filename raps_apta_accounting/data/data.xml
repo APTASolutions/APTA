@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Cron to make the first accounting charge-->
+    <record id="ir_cron_first_accounting_charge" model="ir.cron">
+        <field name="name">Accounting Charge</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+        <field name="model_id" ref="model_account_move_line"/>
+        <field name="code">model._first_account_move_charge()</field>
+        <field name="state">code</field>
+    </record>
+
+    <!-- Cron to set to posted the first accounting charged-->
+    <!-- It is not possible to create accounts direcltly in Posted state-->
+    <record id="ir_cron_set_to_posted_accounting" model="ir.cron">
+        <field name="name">Posted accounting first charge</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+        <field name="model_id" ref="model_account_move_line"/>
+        <field name="code">model._set_to_posted_accounts()</field>
+        <field name="state">code</field>
+    </record>
+</odoo>
